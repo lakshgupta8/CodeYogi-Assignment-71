@@ -1,10 +1,10 @@
 import { useState, useEffect, useMemo } from "react";
-import CartDetail from "./components/CartDetail";
-import EmptyCart from "./components/EmptyCart";
-import Loading from "./components/Loading";
-import { getProduct } from "./api";
 import { Link, useLocation } from "react-router-dom";
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
+import CartDetail from "../components/CartDetail";
+import EmptyCart from "../components/EmptyCart";
+import Loading from "../components/Loading";
+import { getProduct } from "../api";
 
 function CartPage({ cartItems, onRemoveItem, onQuantityChange }) {
   const location = useLocation();

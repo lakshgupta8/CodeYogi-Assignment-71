@@ -9,11 +9,11 @@ function Navbar({ count }) {
 
   const navLinks = useMemo(
     () => [
-      { name: "Home", to: "/" },
-      { name: "Products", to: "/products" },
-      { name: "About", to: "/about" },
-      { name: "Contact", to: "/contact" },
-      { name: "Login", to: "/login" },
+      { name: "HOME", to: "/" },
+      { name: "ALL PRODUCTS", to: "/products" },
+      { name: "ABOUT", to: "/about" },
+      { name: "CONTACT", to: "/contact" },
+      { name: "ACCOUNT  ↯", to: "/login" },
     ],
     []
   );
@@ -67,10 +67,10 @@ function Navbar({ count }) {
                 return (
                   <li
                     key={link.to}
-                    className={`mx-2 text-sm ${
+                    className={`mx-4 text-xs ${
                       isActive
-                        ? "text-gray-700 font-semibold"
-                        : "text-primary-default hover:text-primary-light"
+                      ? "text-primary-default"
+                      : "text-gray-700"
                     }`}
                   >
                     <Link to={link.to}>{link.name}</Link>
@@ -96,7 +96,7 @@ function Navbar({ count }) {
       </div>
 
       {mobileMenuOpen && (
-        <MobileMenu
+        <FMobileMenu
           isOpen={mobileMenuOpen}
           onClose={closeMobileMenu}
           navLinks={navLinks}

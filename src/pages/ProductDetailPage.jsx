@@ -1,13 +1,13 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams, useLocation, Link } from "react-router-dom";
-import { getProduct } from "./api";
-import NotFound from "./components/NotFound";
-import LoadingProduct from "./components/LoadingProduct";
 import {
   HiArrowSmLeft,
   HiArrowSmRight,
   HiOutlineArrowNarrowLeft,
 } from "react-icons/hi";
+import NotFound from "../components/NotFound";
+import LoadingProduct from "../components/LoadingProduct";
+import { getProduct } from "../api";
 
 function ProductDetailPage({ onAddToCart }) {
   const id = +useParams().id;
@@ -18,7 +18,7 @@ function ProductDetailPage({ onAddToCart }) {
   const [count, setCount] = useState(1);
 
   useEffect(
-    function() {
+    function () {
       setCount(1);
       getProduct(id)
         .then(function (product) {
@@ -43,27 +43,36 @@ function ProductDetailPage({ onAddToCart }) {
     category = product.category;
   }
 
-  const handleCountChange = useCallback(function (event) {
-    setCount(Number(event.target.value));
-  }, [setCount]);
+  const handleCountChange = useCallback(
+    function (event) {
+      setCount(Number(event.target.value));
+    },
+    [setCount]
+  );
 
-  const handleAddToCart = useCallback(function (event) {
-    const button = event.currentTarget;
-    button.textContent = "ADDING...";
-    button.disabled = true;
+  const handleAddToCart = useCallback(
+    function (event) {
+      const button = event.currentTarget;
+      button.textContent = "ADDING...";
+      button.disabled = true;
 
-    setTimeout(function () {
-      button.textContent = "ADD TO CART";
-      button.disabled = false;
-    }, 300);
+      setTimeout(function () {
+        button.textContent = "ADD TO CART";
+        button.disabled = false;
+      }, 300);
 
-    onAddToCart(id, count);
-    setCount(1);
-  }, [onAddToCart, id, count]);
+      onAddToCart(id, count);
+      setCount(1);
+    },
+    [onAddToCart, id, count]
+  );
 
-  const handleProductSwitch = useCallback(function () {
-    setLoading(true);
-  }, [setLoading]);
+  const handleProductSwitch = useCallback(
+    function () {
+      setLoading(true);
+    },
+    [setLoading]
+  );
 
   return (
     <>
@@ -107,7 +116,10 @@ function ProductDetailPage({ onAddToCart }) {
                     min={1}
                     className="text-gray-600 w-24 sm:w-16 px-3 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-primary-dark"
                   />
-                  <button onClick={handleAddToCart} className="bg-primary-default hover:bg-primary-dark text-white font-medium px-8 sm:px-12 py-2 rounded-md w-full sm:w-auto">
+                  <button
+                    onClick={handleAddToCart}
+                    className="bg-primary-default hover:bg-primary-dark text-white font-medium px-8 sm:px-12 py-2 rounded-md w-full sm:w-auto"
+                  >
                     ADD TO CART
                   </button>
                 </div>

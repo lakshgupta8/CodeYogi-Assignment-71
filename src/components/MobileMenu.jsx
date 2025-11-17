@@ -38,8 +38,8 @@ function MobileMenu({ isOpen, onClose, navLinks, count, location }) {
                     onClick={onClose}
                     className={`block text-lg py-2 ${
                       isActive
-                        ? "text-gray-700 font-semibold"
-                        : "text-primary-default hover:text-primary-light"
+                        ? "text-primary-default"
+                        : "text-gray-700"
                     }`}
                   >
                     {link.name}
@@ -60,8 +60,8 @@ function MobileMenu({ isOpen, onClose, navLinks, count, location }) {
             <span
               className={
                 location.pathname === "/cart"
-                  ? "text-gray-700 font-semibold"
-                  : "text-primary-default font-medium"
+                  ? "text-primary-default font-medium"
+                  : "text-gray-700 font-semibold"
               }
             >
               Your Cart

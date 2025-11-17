@@ -1,14 +1,14 @@
 import { useState, useMemo, useCallback } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import HomePage from "./HomePage";
-import ProductDetailPage from "./ProductDetailPage";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import CartPage from "./CartPage";
-import LoginPage from "./LoginPage";
-import SignUpPage from "./SignUpPage";
-import ForgotPasswordPage from "./ForgotPasswordPage";
 import NotFound from "./components/NotFound";
+import HomePage from "./pages/HomePage";
+import ProductDetailPage from "./pages/ProductDetailPage";
+import CartPage from "./pages/CartPage";
+import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignUpPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 
 function App() {
   const location = useLocation();

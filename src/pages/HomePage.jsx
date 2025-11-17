@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import Filter from "./components/Filter";
-import ProductGrid from "./components/ProductGrid";
-import Pagination from "./components/Pagination";
-import { getProductList } from "./api";
-import NoMatch from "./components/NoMatch.jsx";
-import Loading from "./components/Loading";
+import Filter from "../components/Filter.jsx";
+import ProductGrid from "../components/ProductGrid.jsx";
+import Pagination from "../components/Pagination.jsx";
+import NoMatch from "../components/NoMatch.jsx";
+import Loading from "../components/Loading.jsx";
+import { getProductList } from "../api.js";
 
 function HomePage() {
   const [productList, setProducts] = useState([]);
