@@ -11,9 +11,12 @@ function CartPage({ cartItems, onRemoveItem, onQuantityChange }) {
   const [cartItemsData, setCartItemsData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const ids = useMemo(function () {
-    return Object.keys(cartItems || {});
-  }, [cartItems]);
+  const ids = useMemo(
+    function () {
+      return Object.keys(cartItems || {});
+    },
+    [cartItems]
+  );
 
   useEffect(
     function () {

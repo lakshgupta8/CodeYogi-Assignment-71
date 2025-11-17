@@ -20,38 +20,50 @@ function HomePage() {
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState("default");
 
-  const filteredProducts = useMemo(function () {
-    let filtered = productList.filter(function (item) {
-      return item.title.toLowerCase().indexOf(query.toLowerCase()) !== -1;
-    });
-
-    if (sort === "title") {
-      filtered = filtered.sort(function (a, b) {
-        return a.title.localeCompare(b.title);
+  const filteredProducts = useMemo(
+    function () {
+      let filtered = productList.filter(function (item) {
+        return item.title.toLowerCase().indexOf(query.toLowerCase()) !== -1;
       });
-    } else if (sort === "price-asc") {
-      filtered = filtered.sort(function (a, b) {
-        return a.price - b.price;
-      });
-    } else if (sort === "price-desc") {
-      filtered = filtered.sort(function (a, b) {
-        return b.price - a.price;
-      });
-    }
-    return filtered;
-  }, [productList, query, sort])
 
-  const handleSearch = useCallback(function (newQuery) {
-    setQuery(newQuery);
-  }, [setQuery]);
+      if (sort === "title") {
+        filtered = filtered.sort(function (a, b) {
+          return a.title.localeCompare(b.title);
+        });
+      } else if (sort === "price-asc") {
+        filtered = filtered.sort(function (a, b) {
+          return a.price - b.price;
+        });
+      } else if (sort === "price-desc") {
+        filtered = filtered.sort(function (a, b) {
+          return b.price - a.price;
+        });
+      }
+      return filtered;
+    },
+    [productList, query, sort]
+  );
 
-  const handleSort = useCallback(function (sortType) {
-    setSort(sortType);
-  }, [setSort]);
+  const handleSearch = useCallback(
+    function (newQuery) {
+      setQuery(newQuery);
+    },
+    [setQuery]
+  );
 
-  const handleClearSearch = useCallback(function () {
-    setQuery("");
-  }, [setQuery]);
+  const handleSort = useCallback(
+    function (sortType) {
+      setSort(sortType);
+    },
+    [setSort]
+  );
+
+  const handleClearSearch = useCallback(
+    function () {
+      setQuery("");
+    },
+    [setQuery]
+  );
 
   return (
     <div className="my-8 md:my-16 bg-white py-8 px-9 max-w-xl sm:max-w-2xl md:max-w-4xl lg:max-w-6xl mx-auto">
@@ -73,10 +85,7 @@ function HomePage() {
         </>
       )}
       {!loading && filteredProducts.length === 0 && (
-        <NoMatch
-          searchQuery={query}
-          onClearSearch={handleClearSearch}
-        />
+        <NoMatch searchQuery={query} onClearSearch={handleClearSearch} />
       )}
     </div>
   );

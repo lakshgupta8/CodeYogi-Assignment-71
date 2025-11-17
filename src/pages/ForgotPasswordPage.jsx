@@ -42,7 +42,6 @@ function ForgotPasswordPage() {
     validationSchema: validationSchema,
   });
 
-
   return (
     <div
       className="h-screen w-full bg-cover bg-center bg-no-repeat flex items-center justify-center"

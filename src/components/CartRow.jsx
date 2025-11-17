@@ -3,23 +3,32 @@ import { Link } from "react-router-dom";
 import { TiDeleteOutline } from "react-icons/ti";
 
 function CartRow({ item, quantity, onQuantityChange, onRemoveItem }) {
-  const subtotal = useMemo(function () {
-    return item.price * Number(quantity);
-  }, [item.price, quantity]);
+  const subtotal = useMemo(
+    function () {
+      return item.price * Number(quantity);
+    },
+    [item.price, quantity]
+  );
 
-  const handleChange = useCallback(function (event) {
-    const val = event.target.value;
-    const num = Number(val);
-    if (isNaN(num) || num <= 0) {
+  const handleChange = useCallback(
+    function (event) {
+      const val = event.target.value;
+      const num = Number(val);
+      if (isNaN(num) || num <= 0) {
+        onRemoveItem(item.id);
+      } else {
+        onQuantityChange(item.id, num);
+      }
+    },
+    [onRemoveItem, onQuantityChange, item.id]
+  );
+
+  const handleRemove = useCallback(
+    function () {
       onRemoveItem(item.id);
-    } else {
-      onQuantityChange(item.id, num);
-    }
-  }, [onRemoveItem, onQuantityChange, item.id]);
-
-  const handleRemove = useCallback(function () {
-    onRemoveItem(item.id);
-  }, [onRemoveItem, item.id]);
+    },
+    [onRemoveItem, item.id]
+  );
 
   return (
     <div className="px-4 py-3 flex flex-col sm:grid grid-cols-12 gap-4 text-center items-center text-gray-800 font-medium">
@@ -68,7 +77,8 @@ function CartRow({ item, quantity, onQuantityChange, onRemoveItem }) {
               min="0"
               value={quantity}
               onChange={handleChange}
-              className="border border-gray-300 px-2 py-1 w-16 text-center" />
+              className="border border-gray-300 px-2 py-1 w-16 text-center"
+            />
           </div>
           <div className="flex justify-between">
             <span className="font-semibold">Subtotal</span>

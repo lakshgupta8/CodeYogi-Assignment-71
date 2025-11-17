@@ -37,9 +37,7 @@ function MobileMenu({ isOpen, onClose, navLinks, count, location }) {
                     to={link.to}
                     onClick={onClose}
                     className={`block text-lg py-2 ${
-                      isActive
-                        ? "text-primary-default"
-                        : "text-gray-700"
+                      isActive ? "text-primary-default" : "text-gray-700"
                     }`}
                   >
                     {link.name}

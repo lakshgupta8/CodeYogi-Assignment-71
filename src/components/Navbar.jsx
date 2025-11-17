@@ -68,9 +68,7 @@ function Navbar({ count }) {
                   <li
                     key={link.to}
                     className={`mx-4 text-xs ${
-                      isActive
-                      ? "text-primary-default"
-                      : "text-gray-700"
+                      isActive ? "text-primary-default" : "text-gray-700"
                     }`}
                   >
                     <Link to={link.to}>{link.name}</Link>
@@ -96,7 +94,7 @@ function Navbar({ count }) {
       </div>
 
       {mobileMenuOpen && (
-        <FMobileMenu
+        <MobileMenu
           isOpen={mobileMenuOpen}
           onClose={closeMobileMenu}
           navLinks={navLinks}

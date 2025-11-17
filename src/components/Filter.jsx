@@ -1,13 +1,19 @@
 import { memo, useCallback } from "react";
 
 function Filter({ query, sort, onSearch, onSort }) {
-  const handleSearch = useCallback(function (event) {
-    onSearch(event.target.value);
-  }, [onSearch]);
+  const handleSearch = useCallback(
+    function (event) {
+      onSearch(event.target.value);
+    },
+    [onSearch]
+  );
 
-  const handleSort = useCallback(function (event) {
-    onSort(event.target.value);
-  }, [onSort]);
+  const handleSort = useCallback(
+    function (event) {
+      onSort(event.target.value);
+    },
+    [onSort]
+  );
 
   return (
     <div className="flex flex-col sm:flex-row sm:justify-between gap-3">
