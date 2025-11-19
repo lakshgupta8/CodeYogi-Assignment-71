@@ -125,12 +125,9 @@ export default function CartProvider({ children }) {
     [subtotal]
   );
 
-  const getItemSubtotal = useCallback(
-    function (price, quantity) {
-      return price * Number(quantity);
-    },
-    []
-  );
+  const getItemSubtotal = useCallback(function (price, quantity) {
+    return price * Number(quantity);
+  }, []);
 
   const value = {
     cartItems,

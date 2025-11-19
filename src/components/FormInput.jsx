@@ -30,7 +30,7 @@ const FormInput = ({
     <div>
       <div className="relative flex items-center">
         {icon && (
-          <span className="absolute left-3 w-5 h-5 pointer-events-none opacity-80">
+          <span className="left-3 absolute opacity-80 w-5 h-5 pointer-events-none">
             {icon}
           </span>
         )}
@@ -51,7 +51,7 @@ const FormInput = ({
         />
       </div>
       {touched && error && (
-        <p className="text-primary-medium text-sm mt-1 pl-1">{error}</p>
+        <p className="mt-1 pl-1 text-primary-medium text-sm">{error}</p>
       )}
     </div>
   );

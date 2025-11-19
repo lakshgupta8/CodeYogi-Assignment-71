@@ -3,9 +3,9 @@ import { ImSpinner9 } from "react-icons/im";
 
 function Loading() {
   return (
-    <div className="flex flex-col items-center justify-center py-12 mb-22">
-      <ImSpinner9 className="animate-spin opacity-75 text-3xl text-primary-medium" />
-      <p className="mt-3 text-sm text-gray-600">Loading products…</p>
+    <div className="flex flex-col justify-center items-center mb-22 py-12">
+      <ImSpinner9 className="opacity-75 text-primary-medium text-3xl animate-spin" />
+      <p className="mt-3 text-gray-600 text-sm">Loading products…</p>
     </div>
   );
 }

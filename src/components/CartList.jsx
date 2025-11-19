@@ -4,7 +4,7 @@ import CartRow from "./CartRow";
 
 function CartList() {
   const { cartItemsData } = useCart();
-  
+
   const rows = useMemo(
     function () {
       return cartItemsData.map(function (item) {

@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 
 function Pagination() {
   return (
-    <div className="flex mt-8 gap-1">
-      <Link className="bg-white text-center text-primary-dark border-primary-dark border h-8 w-8 focus:text-white focus:bg-primary-dark hover:bg-primary-dark hover:text-white">
+    <div className="flex gap-1 mt-8">
+      <Link className="bg-white hover:bg-primary-dark focus:bg-primary-dark border border-primary-dark w-8 h-8 text-primary-dark hover:text-white focus:text-white text-center">
         1
       </Link>
-      <Link className="bg-white text-center text-primary-dark border-primary-dark border h-8 w-8 focus:text-white focus:bg-primary-dark hover:bg-primary-dark hover:text-white">
+      <Link className="bg-white hover:bg-primary-dark focus:bg-primary-dark border border-primary-dark w-8 h-8 text-primary-dark hover:text-white focus:text-white text-center">
         2
       </Link>
-      <Link className="bg-white text-center text-primary-dark border-primary-dark border h-8 w-8 focus:text-white focus:bg-primary-dark hover:bg-primary-dark hover:text-white">
+      <Link className="bg-white hover:bg-primary-dark focus:bg-primary-dark border border-primary-dark w-8 h-8 text-primary-dark hover:text-white focus:text-white text-center">
         {"\u2192"}
       </Link>
     </div>

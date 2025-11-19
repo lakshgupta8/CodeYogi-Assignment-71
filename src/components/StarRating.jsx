@@ -18,10 +18,10 @@ function StarRating({ rating }) {
           <div key={index} className="relative">
             <Star className="w-4 h-4 text-primary-light" />
             <div
-              className="absolute top-0 left-0 overflow-hidden"
+              className="top-0 left-0 absolute overflow-hidden"
               style={{ width: `${fillPercentage}%` }}
             >
-              <Star className="w-4 h-4 text-primary-dark fill-primary-default" />
+              <Star className="fill-primary-default w-4 h-4 text-primary-dark" />
             </div>
           </div>
         );

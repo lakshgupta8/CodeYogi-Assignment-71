@@ -66,10 +66,10 @@ function HomePage() {
   );
 
   return (
-    <div className="my-8 md:my-16 bg-white py-8 px-9 max-w-xl sm:max-w-2xl md:max-w-4xl lg:max-w-6xl mx-auto">
+    <div className="bg-white mx-auto my-8 md:my-16 px-9 py-8 max-w-xl sm:max-w-2xl md:max-w-4xl lg:max-w-6xl">
       <div className="flex flex-col gap-4">
-        <p className="text-xs text-gray-400">Home / Shop</p>
-        <h1 className="text-4xl text-primary-light mb-4">Shop</h1>
+        <p className="text-gray-400 text-xs">Home / Shop</p>
+        <h1 className="mb-4 text-primary-light text-4xl">Shop</h1>
         <Filter
           query={query}
           sort={sort}

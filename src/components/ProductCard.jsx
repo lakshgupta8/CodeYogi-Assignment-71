@@ -21,13 +21,13 @@ function ProductCard({
 
   return (
     <Link to={"/product/" + id} state={{ from: "home" }}>
-      <div className="bg-white flex flex-col">
-        <div className="mb-3 bg-gray-100">
+      <div className="flex flex-col bg-white">
+        <div className="bg-gray-100 mb-3">
           <img src={thumbnail} alt={title} className="w-full object-contain" />
         </div>
 
-        <p className="text-sm text-gray-400 mt-1">{category}</p>
-        <h3 className="font-semibold text-gray-800 mt-1">{title}</h3>
+        <p className="mt-1 text-gray-400 text-sm">{category}</p>
+        <h3 className="mt-1 font-semibold text-gray-800">{title}</h3>
         <StarRating rating={rating} />
         <div className="flex gap-2 mt-2 mb-2">
           {originalPrice && (
@@ -35,7 +35,7 @@ function ProductCard({
               ${originalPrice.toFixed(2)}
             </span>
           )}
-          <span className="text-primary-dark font-bold">
+          <span className="font-bold text-primary-dark">
             ${price.toFixed(2)}
           </span>
         </div>

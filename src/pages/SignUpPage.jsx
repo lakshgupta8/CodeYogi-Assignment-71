@@ -61,23 +61,23 @@ function SignUpPage() {
 
   return (
     <div
-      className="h-screen w-full bg-cover bg-center bg-no-repeat flex items-center justify-center"
+      className="flex justify-center items-center bg-cover bg-no-repeat bg-center w-full h-screen"
       style={{
         backgroundImage: 'url("/images/loginbg.svg")',
       }}
     >
-      <div className="absolute top-4 right-4">
+      <div className="top-4 right-4 absolute">
         <Link
           to="/"
-          className="text-white text-sm hover:underline focus:text-gray-800"
+          className="text-white focus:text-gray-800 text-sm hover:underline"
         >
           Continue without login
         </Link>
       </div>
 
-      <div className="w-full max-w-md flex flex-col px-4 gap-6 text-white">
-        <FaAmazon className="text-9xl mb-6 mx-auto" />
-        <h1 className="text-2xl font-bold text-center">Create Your Account</h1>
+      <div className="flex flex-col gap-6 px-4 w-full max-w-md text-white">
+        <FaAmazon className="mx-auto mb-6 text-9xl" />
+        <h1 className="font-bold text-2xl text-center">Create Your Account</h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <FormInput
@@ -131,7 +131,7 @@ function SignUpPage() {
           <button
             type="submit"
             disabled={!isValid}
-            className="w-full bg-white text-[#38A5FF] py-3 rounded font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
+            className="bg-white disabled:opacity-60 py-3 rounded w-full font-semibold text-[#38A5FF] disabled:cursor-not-allowed"
           >
             CREATE
           </button>
@@ -140,7 +140,7 @@ function SignUpPage() {
             Already have an account?
             <Link
               to="/login"
-              className="underline hover:underline-offset-2 ml-1"
+              className="ml-1 underline hover:underline-offset-2"
             >
               Login
             </Link>

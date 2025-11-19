@@ -4,9 +4,9 @@ import notfoundimage from "/images/404notfound.jpg";
 
 function NotFound() {
   return (
-    <div className="flex flex-col my-16 bg-white items-center py-6 max-w-md md:max-w-3xl text-center gap-4 mx-auto">
+    <div className="flex flex-col items-center gap-4 bg-white mx-auto my-16 py-6 max-w-md md:max-w-3xl text-center">
       <img src={notfoundimage} alt="404 Not Found" className="w-40 h-40" />
-      <h2 className="text-4xl font-semibold text-primary-dark">
+      <h2 className="font-semibold text-primary-dark text-4xl">
         Page Not Found
       </h2>
       <div className="text-gray-500 text-sm">
@@ -16,7 +16,7 @@ function NotFound() {
 
       <Link
         to="/"
-        className="bg-primary-default hover:bg-primary-medium text-white px-5 py-2 mt-6 rounded-3xl font-medium"
+        className="bg-primary-default hover:bg-primary-medium mt-6 px-5 py-2 rounded-3xl font-medium text-white"
       >
         GO HOME
       </Link>

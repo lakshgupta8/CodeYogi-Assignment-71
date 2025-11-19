@@ -5,7 +5,7 @@ import { useCart } from "../hooks/useCart";
 
 function MobileMenu({ isOpen, onClose, navLinks, location }) {
   const { count } = useCart();
-  
+
   if (!isOpen) return null;
 
   return (
