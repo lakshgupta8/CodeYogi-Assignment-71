@@ -1,13 +1,16 @@
 import { memo, useMemo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { TiDeleteOutline } from "react-icons/ti";
+import { useCart } from "../context/CartContext";
 
-function CartRow({ item, quantity, onQuantityChange, onRemoveItem }) {
+function CartRow({ item }) {
+  const { updateQuantity, removeFromCart, getItemSubtotal } = useCart();
+  const quantity = item.quantity;
   const subtotal = useMemo(
     function () {
-      return item.price * Number(quantity);
+      return getItemSubtotal(item.price, quantity);
     },
-    [item.price, quantity]
+    [getItemSubtotal, item.price, quantity]
   );
 
   const handleChange = useCallback(
@@ -15,25 +18,25 @@ function CartRow({ item, quantity, onQuantityChange, onRemoveItem }) {
       const val = event.target.value;
       const num = Number(val);
       if (isNaN(num) || num <= 0) {
-        onRemoveItem(item.id);
+        removeFromCart(item.id);
       } else {
-        onQuantityChange(item.id, num);
+        updateQuantity(item.id, num);
       }
     },
-    [onRemoveItem, onQuantityChange, item.id]
+    [removeFromCart, updateQuantity, item.id]
   );
 
   const handleRemove = useCallback(
     function () {
-      onRemoveItem(item.id);
+      removeFromCart(item.id);
     },
-    [onRemoveItem, item.id]
+    [removeFromCart, item.id]
   );
 
   return (
-    <div className="px-4 py-3 flex flex-col sm:grid grid-cols-12 gap-4 text-center items-center text-gray-800 font-medium">
+    <div className="flex flex-col items-center gap-4 sm:grid grid-cols-12 px-4 py-3 font-medium text-gray-800 text-center">
       <button
-        className="hidden sm:block col-span-1 text-2xl text-gray-400 hover:text-gray-600"
+        className="hidden sm:block col-span-1 text-gray-400 hover:text-gray-600 text-2xl"
         onClick={handleRemove}
       >
         <TiDeleteOutline />
@@ -63,7 +66,7 @@ function CartRow({ item, quantity, onQuantityChange, onRemoveItem }) {
 
         <div className="sm:hidden space-y-2">
           <div className="flex justify-between">
-            <span className="font-semibold mr-2">Product</span>
+            <span className="mr-2 font-semibold">Product</span>
             <span className="text-primary-default text-end">{item.title}</span>
           </div>
           <div className="flex justify-between">
@@ -77,7 +80,7 @@ function CartRow({ item, quantity, onQuantityChange, onRemoveItem }) {
               min="0"
               value={quantity}
               onChange={handleChange}
-              className="border border-gray-300 px-2 py-1 w-16 text-center"
+              className="px-2 py-1 border border-gray-300 w-16 text-center"
             />
           </div>
           <div className="flex justify-between">
@@ -95,7 +98,7 @@ function CartRow({ item, quantity, onQuantityChange, onRemoveItem }) {
         <input
           type="number"
           value={quantity}
-          className="border border-gray-300 px-2 py-1 w-12 sm:w-16 text-center"
+          className="px-2 py-1 border border-gray-300 w-12 sm:w-16 text-center"
           onChange={handleChange}
         />
       </div>

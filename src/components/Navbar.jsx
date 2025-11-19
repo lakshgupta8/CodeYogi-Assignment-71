@@ -1,11 +1,13 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { HiOutlineShoppingBag, HiOutlineViewList } from "react-icons/hi";
+import { useCart } from "../context/CartContext";
 import MobileMenu from "./MobileMenu";
 
-function Navbar({ count }) {
+function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { count } = useCart();
 
   const navLinks = useMemo(
     () => [
@@ -38,8 +40,8 @@ function Navbar({ count }) {
 
   return (
     <>
-      <div className="bg-white py-4 px-2">
-        <div className="flex items-center justify-between mx-auto max-w-xl sm:max-w-2xl md:max-w-4xl lg:max-w-6xl">
+      <div className="bg-white px-2 py-4">
+        <div className="flex justify-between items-center mx-auto max-w-xl sm:max-w-2xl md:max-w-4xl lg:max-w-6xl">
           <Link to="/">
             <img
               src="/images/amazonlogo.svg"
@@ -80,11 +82,11 @@ function Navbar({ count }) {
             <Link
               to="/cart"
               state={{ from: location?.pathname }}
-              className="ml-6 flex flex-col items-center relative"
+              className="relative flex flex-col items-center ml-6"
             >
-              <HiOutlineShoppingBag className="text-4xl text-primary-default" />
+              <HiOutlineShoppingBag className="text-primary-default text-4xl" />
               {count > 0 && (
-                <span className="absolute top-4 right-0 text-xs bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center">
+                <span className="top-4 right-0 absolute flex justify-center items-center bg-red-500 rounded-full w-5 h-5 text-white text-xs">
                   {count}
                 </span>
               )}
@@ -98,7 +100,6 @@ function Navbar({ count }) {
           isOpen={mobileMenuOpen}
           onClose={closeMobileMenu}
           navLinks={navLinks}
-          count={count}
           location={location}
         />
       )}
