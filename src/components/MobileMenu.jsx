@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { HiOutlineShoppingBag, HiX } from "react-icons/hi";
 import { memo } from "react";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../hooks/useCart";
 
 function MobileMenu({ isOpen, onClose, navLinks, location }) {
   const { count } = useCart();

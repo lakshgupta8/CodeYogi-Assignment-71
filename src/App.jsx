@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import { CartProvider } from "./context/CartContext";
+import CartProvider from "./context/CartContext";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import NotFound from "./components/NotFound";
@@ -10,7 +10,7 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 
-function AppContent() {
+function App() {
   const location = useLocation();
 
   const isLoginPage =
@@ -19,28 +19,24 @@ function AppContent() {
     location.pathname === "/forgot-password";
 
   return (
-    <div className="flex flex-col bg-gray-100 min-h-screen">
-      {!isLoginPage && <Navbar />}
-      <div className="flex-1">
-        <Routes>
-          <Route index element={<HomePage />} />
-          <Route path="/product/:id" element={<ProductDetailPage />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
-      {!isLoginPage && <Footer />}
-    </div>
-  );
-}
-
-function App() {
-  return (
     <CartProvider>
-      <AppContent />
+      <div className="flex flex-col bg-gray-100 min-h-screen">
+        {!isLoginPage && <Navbar />}
+
+        <div className="flex-1">
+          <Routes>
+            <Route index element={<HomePage />} />
+            <Route path="/product/:id" element={<ProductDetailPage />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+
+        {!isLoginPage && <Footer />}
+      </div>
     </CartProvider>
   );
 }

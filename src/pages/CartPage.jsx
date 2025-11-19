@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../hooks/useCart";
 import CartDetail from "../components/CartDetail";
 import EmptyCart from "../components/EmptyCart";
 import Loading from "../components/Loading";

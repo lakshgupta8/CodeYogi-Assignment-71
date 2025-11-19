@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { HiOutlineShoppingBag, HiOutlineViewList } from "react-icons/hi";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../hooks/useCart";
 import MobileMenu from "./MobileMenu";
 
 function Navbar() {

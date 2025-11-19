@@ -5,7 +5,7 @@ import {
   HiArrowSmRight,
   HiOutlineArrowNarrowLeft,
 } from "react-icons/hi";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../hooks/useCart";
 import NotFound from "../components/NotFound";
 import LoadingProduct from "../components/LoadingProduct";
 import { getProduct } from "../api";

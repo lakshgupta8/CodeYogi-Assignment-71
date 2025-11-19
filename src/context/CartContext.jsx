@@ -1,6 +1,5 @@
 import {
   createContext,
-  useContext,
   useState,
   useMemo,
   useCallback,
@@ -10,7 +9,9 @@ import { getProduct } from "../api";
 
 const CartContext = createContext(undefined);
 
-export function CartProvider({ children }) {
+export { CartContext };
+
+export default function CartProvider({ children }) {
   const savedCartItems = JSON.parse(localStorage.getItem("cartItems")) || {};
   const [cartItems, setCartItems] = useState(savedCartItems);
   const [cartItemsData, setCartItemsData] = useState([]);
@@ -146,12 +147,4 @@ export function CartProvider({ children }) {
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
-}
-
-export function useCart() {
-  const context = useContext(CartContext);
-  if (context === undefined) {
-    throw new Error("useCart must be used within a CartProvider");
-  }
-  return context;
 }

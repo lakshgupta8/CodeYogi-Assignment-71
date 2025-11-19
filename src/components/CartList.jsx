@@ -1,5 +1,5 @@
 import { memo, useMemo } from "react";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../hooks/useCart";
 import CartRow from "./CartRow";
 
 function CartList() {

@@ -1,9 +1,9 @@
-import { useCart } from "../context/CartContext";
+import { useCart } from "../hooks/useCart";
 import CartList from "./CartList";
 import CartTotals from "./CartTotals";
 
 function CartDetail() {
-  const { subtotal, updateCart } = useCart();
+  const { updateCart } = useCart();
 
   return (
     <div className="flex flex-col">
@@ -37,7 +37,7 @@ function CartDetail() {
         </div>
       </div>
       <div className="self-end mt-2 md:mt-6 w-full">
-        <CartTotals subtotal={subtotal} />
+        <CartTotals />
       </div>
     </div>
   );

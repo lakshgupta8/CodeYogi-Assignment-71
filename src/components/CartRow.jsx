@@ -1,7 +1,7 @@
 import { memo, useMemo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { TiDeleteOutline } from "react-icons/ti";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../hooks/useCart";
 
 function CartRow({ item }) {
   const { updateQuantity, removeFromCart, getItemSubtotal } = useCart();
