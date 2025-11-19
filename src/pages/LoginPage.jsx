@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { FaAmazon } from "react-icons/fa";
-import { useFormik } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormInput from "../components/FormInput";
 
@@ -26,22 +26,10 @@ function LoginPage() {
     []
   );
 
-  const {
-    handleSubmit,
-    values,
-    handleChange,
-    errors,
-    handleBlur,
-    touched,
-    isValid,
-  } = useFormik({
-    initialValues: {
-      username: "",
-      password: "",
-    },
-    onSubmit: callLoginApi,
-    validationSchema: validationSchema,
-  });
+  const initialValues = {
+    username: "",
+    password: "",
+  };
 
   return (
     <div
@@ -65,55 +53,52 @@ function LoginPage() {
           Login to Your Account
         </h1>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <FormInput
-            id="username"
-            name="username"
-            type="text"
-            placeholder="Username"
-            value={values.username}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.username}
-            touched={touched.username}
-          />
+        <Formik
+          initialValues={initialValues}
+          onSubmit={callLoginApi}
+          validationSchema={validationSchema}
+          validateOnMount
+        >
+          <Form className="space-y-4">
+            <FormInput
+              id="username"
+              name="username"
+              type="text"
+              placeholder="Username"
+            />
 
-          <FormInput
-            id="password"
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.password}
-            touched={touched.password}
-          />
+            <FormInput
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Password"
+            />
 
-          <div className="text-sm text-center">
-            <Link to="/forgot-password" className="hover:underline">
-              Forgot password?
-            </Link>
-          </div>
+            <div className="text-sm text-center">
+              <Link to="/forgot-password" className="hover:underline">
+                Forgot password?
+              </Link>
+            </div>
 
-          <button
-            type="submit"
-            disabled={!isValid}
-            className="bg-white disabled:opacity-60 py-3 rounded w-full font-semibold text-[#38A5FF] disabled:cursor-not-allowed"
-          >
-            LOGIN
-          </button>
-
-          <div className="text-sm text-center">
-            Don't have an account?
-            <Link
-              to="/signup"
-              className="ml-1 underline hover:underline-offset-2"
+            <button
+              type="submit"
+              // disabled={!isValid}
+              className="bg-white disabled:opacity-60 py-3 rounded w-full font-semibold text-[#38A5FF] disabled:cursor-not-allowed"
             >
-              SignUp
-            </Link>
-          </div>
-        </form>
+              LOGIN
+            </button>
+
+            <div className="text-sm text-center">
+              Don't have an account?
+              <Link
+                to="/signup"
+                className="ml-1 underline hover:underline-offset-2"
+              >
+                SignUp
+              </Link>
+            </div>
+          </Form>
+        </Formik>
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import { useField } from "formik";
 import {
   HiOutlineUser,
   HiOutlineMail,
@@ -12,19 +13,12 @@ const iconMap = {
   confirmPassword: <HiOutlineLockClosed className="w-5 h-5" />,
 };
 
-const FormInput = ({
-  id,
-  name,
-  type,
-  placeholder,
-  value,
-  onChange,
-  onBlur,
-  error,
-  touched,
-  className = "",
-}) => {
+function FormInput ({ id, name, placeholder, className = "", ...rest }) {
   const icon = iconMap[name] || null;
+
+  const [data, meta] = useField(name);
+  const { value, onBlur, onChange } = data;
+  const { touched, error } = meta;
 
   return (
     <div>
@@ -40,14 +34,14 @@ const FormInput = ({
         <input
           id={id}
           name={name}
-          type={type}
-          placeholder={placeholder}
           value={value}
           onChange={onChange}
           onBlur={onBlur}
+          placeholder={placeholder}
           className={`w-full p-3 pl-10 border ${
             touched && error ? "border-primary-medium" : "border-white"
           } transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent rounded placeholder-white bg-transparent ${className}`}
+          {...rest}
         />
       </div>
       {touched && error && (

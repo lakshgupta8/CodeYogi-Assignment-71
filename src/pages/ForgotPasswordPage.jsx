@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { FaAmazon } from "react-icons/fa";
-import { useFormik } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormInput from "../components/FormInput";
 
@@ -26,21 +26,9 @@ function ForgotPasswordPage() {
     []
   );
 
-  const {
-    handleSubmit,
-    values,
-    handleChange,
-    errors,
-    handleBlur,
-    touched,
-    isValid,
-  } = useFormik({
-    initialValues: {
-      email: "",
-    },
-    onSubmit: callForgotPasswordApi,
-    validationSchema: validationSchema,
-  });
+  const initialValues = {
+    email: "",
+  };
 
   return (
     <div
@@ -53,42 +41,44 @@ function ForgotPasswordPage() {
         <FaAmazon className="mx-auto mb-6 text-9xl" />
         <h1 className="font-bold text-2xl text-center">Reset your password</h1>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <p className="text-sm text-center">
-            Enter your email address and we'll send you a link to reset your
-            password.
-          </p>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={callForgotPasswordApi}
+          validationSchema={validationSchema}
+          validateOnMount
+        >
+          <Form className="space-y-4">
+            <p className="text-sm text-center">
+              Enter your email address and we'll send you a link to reset your
+              password.
+            </p>
 
-          <FormInput
-            id="email"
-            name="email"
-            type="email"
-            placeholder="Email"
-            value={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.email}
-            touched={touched.email}
-          />
+            <FormInput
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Email"
+            />
 
-          <button
-            type="submit"
-            disabled={!isValid}
-            className="bg-white disabled:opacity-60 py-3 rounded w-full font-semibold text-[#38A5FF] disabled:cursor-not-allowed"
-          >
-            Send Link
-          </button>
-
-          <div className="text-sm text-center">
-            Remember your password?{" "}
-            <Link
-              to="/login"
-              className="ml-1 underline hover:underline-offset-2"
+            <button
+              type="submit"
+              // disabled={!isValid}
+              className="bg-white disabled:opacity-60 py-3 rounded w-full font-semibold text-[#38A5FF] disabled:cursor-not-allowed"
             >
-              Login
-            </Link>
-          </div>
-        </form>
+              Send Link
+            </button>
+
+            <div className="text-sm text-center">
+              Remember your password?{" "}
+              <Link
+                to="/login"
+                className="ml-1 underline hover:underline-offset-2"
+              >
+                Login
+              </Link>
+            </div>
+          </Form>
+        </Formik>
       </div>
     </div>
   );

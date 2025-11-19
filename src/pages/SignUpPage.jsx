@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { FaAmazon } from "react-icons/fa";
-import { useFormik } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormInput from "../components/FormInput";
 
@@ -40,24 +40,12 @@ function SignUpPage() {
     []
   );
 
-  const {
-    handleSubmit,
-    values,
-    handleChange,
-    errors,
-    handleBlur,
-    touched,
-    isValid,
-  } = useFormik({
-    initialValues: {
-      username: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    },
-    onSubmit: callSignInApi,
-    validationSchema: validationSchema,
-  });
+  const initialValues = {
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  };
 
   return (
     <div
@@ -79,73 +67,60 @@ function SignUpPage() {
         <FaAmazon className="mx-auto mb-6 text-9xl" />
         <h1 className="font-bold text-2xl text-center">Create Your Account</h1>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <FormInput
-            id="username"
-            name="username"
-            type="text"
-            placeholder="Username"
-            value={values.username}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.username}
-            touched={touched.username}
-          />
+        <Formik
+          initialValues={initialValues}
+          onSubmit={callSignInApi}
+          validationSchema={validationSchema}
+          validateOnMount
+        >
+          <Form className="space-y-4">
+            <FormInput
+              id="username"
+              name="username"
+              type="text"
+              placeholder="Username"
+            />
 
-          <FormInput
-            id="email"
-            name="email"
-            type="email"
-            placeholder="Email"
-            value={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.email}
-            touched={touched.email}
-          />
+            <FormInput
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Email"
+            />
 
-          <FormInput
-            id="password"
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.password}
-            touched={touched.password}
-          />
+            <FormInput
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Password"
+            />
 
-          <FormInput
-            id="confirm-password"
-            name="confirmPassword"
-            type="password"
-            placeholder="Confirm Password"
-            value={values.confirmPassword}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.confirmPassword}
-            touched={touched.confirmPassword}
-          />
+            <FormInput
+              id="confirm-password"
+              name="confirmPassword"
+              type="password"
+              placeholder="Confirm Password"
+            />
 
-          <button
-            type="submit"
-            disabled={!isValid}
-            className="bg-white disabled:opacity-60 py-3 rounded w-full font-semibold text-[#38A5FF] disabled:cursor-not-allowed"
-          >
-            CREATE
-          </button>
-
-          <div className="text-sm text-center">
-            Already have an account?
-            <Link
-              to="/login"
-              className="ml-1 underline hover:underline-offset-2"
+            <button
+              type="submit"
+              // disabled={!isValid}
+              className="bg-white disabled:opacity-60 py-3 rounded w-full font-semibold text-[#38A5FF] disabled:cursor-not-allowed"
             >
-              Login
-            </Link>
-          </div>
-        </form>
+              CREATE
+            </button>
+
+            <div className="text-sm text-center">
+              Already have an account?
+              <Link
+                to="/login"
+                className="ml-1 underline hover:underline-offset-2"
+              >
+                Login
+              </Link>
+            </div>
+          </Form>
+        </Formik>
       </div>
     </div>
   );
