@@ -2,11 +2,14 @@ import { memo, useMemo } from "react";
 import { Star } from "lucide-react";
 
 function StarRating({ rating }) {
-  const fills = useMemo(function () {
-    return [...Array(5)].map(function (_, index) {
-      return Math.min(Math.max(rating - index, 0), 1) * 100;
-    });
-  }, [rating]);
+  const fills = useMemo(
+    function () {
+      return [...Array(5)].map(function (_, index) {
+        return Math.min(Math.max(rating - index, 0), 1) * 100;
+      });
+    },
+    [rating]
+  );
 
   return (
     <div className="flex gap-1">

@@ -10,7 +10,7 @@ function EmptyCart() {
         alt="No Products"
         className="w-40 h-40 opacity-80"
       />
-      <h2 className="text-2xl font-semibold text-gray-700">No Results Found</h2>
+      <h2 className="text-2xl font-semibold text-gray-700">Cart Is Empty</h2>
       <p className="text-gray-500 mb-4">
         Try adding a product to the cart from the product listing or product
         details page.

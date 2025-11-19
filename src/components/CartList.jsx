@@ -1,21 +1,18 @@
 import { memo, useMemo } from "react";
+import { useCart } from "../context/CartContext";
 import CartRow from "./CartRow";
 
-function CartList({ items, onRemoveItem, onQuantityChange }) {
-  const rows = useMemo(function () {
-    return items.map(function (item) {
-      const qty = item.quantity ?? 1;
-      return (
-        <CartRow
-          key={item.id}
-          item={item}
-          quantity={qty}
-          onQuantityChange={onQuantityChange}
-          onRemoveItem={onRemoveItem}
-        />
-      );
-    });
-  }, [items, onQuantityChange, onRemoveItem]);
+function CartList() {
+  const { cartItemsData } = useCart();
+  
+  const rows = useMemo(
+    function () {
+      return cartItemsData.map(function (item) {
+        return <CartRow key={item.id} item={item} />;
+      });
+    },
+    [cartItemsData]
+  );
 
   return (
     <div className="bg-white overflow-hidden">

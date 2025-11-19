@@ -1,24 +1,26 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams, useLocation, Link } from "react-router-dom";
-import { getProduct } from "./api";
-import NotFound from "./components/NotFound";
-import LoadingProduct from "./components/LoadingProduct";
 import {
   HiArrowSmLeft,
   HiArrowSmRight,
   HiOutlineArrowNarrowLeft,
 } from "react-icons/hi";
+import { useCart } from "../context/CartContext";
+import NotFound from "../components/NotFound";
+import LoadingProduct from "../components/LoadingProduct";
+import { getProduct } from "../api";
 
-function ProductDetailPage({ onAddToCart }) {
+function ProductDetailPage() {
   const id = +useParams().id;
   const location = useLocation();
+  const { addToCart } = useCart();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [count, setCount] = useState(1);
 
   useEffect(
-    function() {
+    function () {
       setCount(1);
       getProduct(id)
         .then(function (product) {
@@ -43,27 +45,36 @@ function ProductDetailPage({ onAddToCart }) {
     category = product.category;
   }
 
-  const handleCountChange = useCallback(function (event) {
-    setCount(Number(event.target.value));
-  }, [setCount]);
+  const handleCountChange = useCallback(
+    function (event) {
+      setCount(Number(event.target.value));
+    },
+    [setCount]
+  );
 
-  const handleAddToCart = useCallback(function (event) {
-    const button = event.currentTarget;
-    button.textContent = "ADDING...";
-    button.disabled = true;
+  const handleAddToCart = useCallback(
+    function (event) {
+      const button = event.currentTarget;
+      button.textContent = "ADDING...";
+      button.disabled = true;
 
-    setTimeout(function () {
-      button.textContent = "ADD TO CART";
-      button.disabled = false;
-    }, 300);
+      setTimeout(function () {
+        button.textContent = "ADD TO CART";
+        button.disabled = false;
+      }, 300);
 
-    onAddToCart(id, count);
-    setCount(1);
-  }, [onAddToCart, id, count]);
+      addToCart(id, count);
+      setCount(1);
+    },
+    [addToCart, id, count]
+  );
 
-  const handleProductSwitch = useCallback(function () {
-    setLoading(true);
-  }, [setLoading]);
+  const handleProductSwitch = useCallback(
+    function () {
+      setLoading(true);
+    },
+    [setLoading]
+  );
 
   return (
     <>
@@ -78,41 +89,44 @@ function ProductDetailPage({ onAddToCart }) {
             <HiOutlineArrowNarrowLeft className="text-gray-800 text-3xl md:text-4xl" />
           </Link>
 
-          <div className="bg-white flex flex-col md:flex-row py-6 px-4 md:px-8 gap-3">
-            <div className="w-full md:w-1/2 flex items-center justify-center bg-gray-100 h-full">
+          <div className="flex md:flex-row flex-col gap-3 bg-white px-4 md:px-8 py-6">
+            <div className="flex justify-center items-center bg-gray-100 w-full md:w-1/2 h-full">
               <img
-                className="w-full h-full object-contain bg-gray-100"
+                className="bg-gray-100 w-full h-full object-contain"
                 src={image}
                 alt={title}
               />
             </div>
 
-            <div className="w-full md:w-1/2 px-2 md:px-8 overflow-auto flex flex-col">
+            <div className="flex flex-col px-2 md:px-8 w-full md:w-1/2 overflow-auto">
               <div className="flex-1">
-                <h1 className="text-3xl lg:text-5xl font-semibold text-gray-500 mb-6 md:mb-10">
+                <h1 className="mb-6 md:mb-10 font-semibold text-gray-500 text-3xl lg:text-5xl">
                   {title}
                 </h1>
-                <p className="text-xl lg:text-3xl font-bold text-gray-600 mb-4">
+                <p className="mb-4 font-bold text-gray-600 text-xl lg:text-3xl">
                   ${price !== null ? price.toFixed(2) : "-"}
                 </p>
-                <p className="text-gray-500 mb-6 md:mb-8 font-semibold text-base lg:text-2xl">
+                <p className="mb-6 md:mb-8 font-semibold text-gray-500 text-base lg:text-2xl">
                   {description}
                 </p>
 
-                <div className="flex flex-col sm:flex-row items-center gap-3">
+                <div className="flex sm:flex-row flex-col items-center gap-3">
                   <input
                     type="number"
                     value={count}
                     onChange={handleCountChange}
                     min={1}
-                    className="text-gray-600 w-24 sm:w-16 px-3 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-primary-dark"
+                    className="px-3 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-primary-dark w-24 sm:w-16 text-gray-600"
                   />
-                  <button onClick={handleAddToCart} className="bg-primary-default hover:bg-primary-dark text-white font-medium px-8 sm:px-12 py-2 rounded-md w-full sm:w-auto">
+                  <button
+                    onClick={handleAddToCart}
+                    className="bg-primary-default hover:bg-primary-dark px-8 sm:px-12 py-2 rounded-md w-full sm:w-auto font-medium text-white"
+                  >
                     ADD TO CART
                   </button>
                 </div>
 
-                <p className="text-base text-gray-500 mt-6">
+                <p className="mt-6 text-gray-500 text-base">
                   Category:
                   <span className="text-primary-default"> {category}</span>
                 </p>

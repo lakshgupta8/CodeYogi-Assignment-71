@@ -11,20 +11,19 @@ function ProductCard({
   thumbnail,
   rating,
 }) {
-  const originalPrice = useMemo(function () {
-    if (discountPercentage === 0 || discountPercentage == null) return null;
-    return (price * 100) / (100 - discountPercentage);
-  }, [price, discountPercentage]);
+  const originalPrice = useMemo(
+    function () {
+      if (discountPercentage === 0 || discountPercentage == null) return null;
+      return (price * 100) / (100 - discountPercentage);
+    },
+    [price, discountPercentage]
+  );
 
   return (
     <Link to={"/product/" + id} state={{ from: "home" }}>
       <div className="bg-white flex flex-col">
         <div className="mb-3 bg-gray-100">
-          <img
-            src={thumbnail}
-            alt={title}
-            className="w-full object-contain"
-          />
+          <img src={thumbnail} alt={title} className="w-full object-contain" />
         </div>
 
         <p className="text-sm text-gray-400 mt-1">{category}</p>
@@ -36,7 +35,9 @@ function ProductCard({
               ${originalPrice.toFixed(2)}
             </span>
           )}
-          <span className="text-primary-dark font-bold">${price.toFixed(2)}</span>
+          <span className="text-primary-dark font-bold">
+            ${price.toFixed(2)}
+          </span>
         </div>
       </div>
     </Link>

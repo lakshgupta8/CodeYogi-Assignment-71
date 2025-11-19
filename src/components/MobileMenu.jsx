@@ -1,25 +1,28 @@
 import { Link } from "react-router-dom";
 import { HiOutlineShoppingBag, HiX } from "react-icons/hi";
 import { memo } from "react";
+import { useCart } from "../context/CartContext";
 
-function MobileMenu({ isOpen, onClose, navLinks, count, location }) {
+function MobileMenu({ isOpen, onClose, navLinks, location }) {
+  const { count } = useCart();
+  
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/60 z-50 sm:hidden" onClick={onClose}>
+    <div className="sm:hidden z-50 fixed inset-0 bg-black/60" onClick={onClose}>
       <div
-        className="absolute top-0 right-0 h-full w-64 bg-gray-100 shadow-lg flex flex-col px-4"
+        className="top-0 right-0 absolute flex flex-col bg-gray-100 shadow-lg px-4 w-64 h-full"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-2 text-primary-default p-1"
+          className="top-4 right-2 absolute p-1 text-primary-default"
           aria-label="Close menu"
         >
           <HiX className="text-3xl" />
         </button>
 
-        <h1 className="pt-8 pb-4 text-2xl border-b border-gray-300 font-semibold text-primary-default">
+        <h1 className="pt-8 pb-4 border-gray-300 border-b font-semibold text-primary-default text-2xl">
           Navigate
         </h1>
 
@@ -37,9 +40,7 @@ function MobileMenu({ isOpen, onClose, navLinks, count, location }) {
                     to={link.to}
                     onClick={onClose}
                     className={`block text-lg py-2 ${
-                      isActive
-                        ? "text-gray-700 font-semibold"
-                        : "text-primary-default hover:text-primary-light"
+                      isActive ? "text-primary-default" : "text-gray-700"
                     }`}
                   >
                     {link.name}
@@ -50,26 +51,26 @@ function MobileMenu({ isOpen, onClose, navLinks, count, location }) {
           </ul>
         </nav>
 
-        <div className="py-4 border-t border-gray-300">
+        <div className="py-4 border-gray-300 border-t">
           <Link
             to="/cart"
             state={{ from: location?.pathname }}
             onClick={onClose}
-            className="flex items-center justify-between"
+            className="flex justify-between items-center"
           >
             <span
               className={
                 location.pathname === "/cart"
-                  ? "text-gray-700 font-semibold"
-                  : "text-primary-default font-medium"
+                  ? "text-primary-default font-medium"
+                  : "text-gray-700 font-semibold"
               }
             >
               Your Cart
             </span>
             <div className="relative">
-              <HiOutlineShoppingBag className="text-2xl text-primary-default" />
+              <HiOutlineShoppingBag className="text-primary-default text-2xl" />
               {count > 0 && (
-                <span className="absolute -top-2 -right-2 bg-primary-default text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                <span className="-top-2 -right-2 absolute flex justify-center items-center bg-primary-default rounded-full w-5 h-5 text-white text-xs">
                   {count}
                 </span>
               )}
