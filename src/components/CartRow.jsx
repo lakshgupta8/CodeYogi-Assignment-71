@@ -4,26 +4,24 @@ import { TiDeleteOutline } from "react-icons/ti";
 import { useCart } from "../hooks/useCart";
 
 function CartRow({ item }) {
-  const { updateQuantity, removeFromCart, getItemSubtotal } = useCart();
-  const quantity = item.quantity;
+  const { updateQuantity, removeFromCart, getItemSubtotal, cartItems } = useCart();
+  const quantity = item.quantity ?? 1;
+  const savedQuantity = cartItems[item.id] ?? item.quantity ?? 1;
   const subtotal = useMemo(
     function () {
-      return getItemSubtotal(item.price, quantity);
+      const result = getItemSubtotal(item.price, savedQuantity);
+      return result ?? 0;
     },
-    [getItemSubtotal, item.price, quantity]
+    [getItemSubtotal, item.price, savedQuantity]
   );
 
   const handleChange = useCallback(
     function (event) {
       const val = event.target.value;
       const num = Number(val);
-      if (isNaN(num) || num <= 0) {
-        removeFromCart(item.id);
-      } else {
-        updateQuantity(item.id, num);
-      }
+      updateQuantity(item.id, num);
     },
-    [removeFromCart, updateQuantity, item.id]
+    [updateQuantity, item.id]
   );
 
   const handleRemove = useCallback(

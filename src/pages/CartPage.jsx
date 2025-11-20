@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
 import { useCart } from "../hooks/useCart";
 import CartDetail from "../components/CartDetail";
@@ -7,7 +8,16 @@ import Loading from "../components/Loading";
 
 function CartPage() {
   const location = useLocation();
-  const { cartItemsData, loading } = useCart();
+  const { cartItemsData, loading, resetPendingQuantities } = useCart();
+
+  useEffect(
+    function () {
+      return function () {
+        resetPendingQuantities();
+      };
+    },
+    [resetPendingQuantities]
+  );
 
   if (loading) {
     return (
