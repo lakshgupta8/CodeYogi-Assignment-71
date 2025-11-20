@@ -47,37 +47,40 @@ function ForgotPasswordPage() {
           validationSchema={validationSchema}
           validateOnMount
         >
-          <Form className="space-y-4">
-            <p className="text-sm text-center">
-              Enter your email address and we'll send you a link to reset your
-              password.
-            </p>
+          {({ isValid, isSubmitting }) => (
+            <Form className="space-y-4">
+              <p className="text-sm text-center">
+                Enter your email address and we'll send you a link to reset your
+                password.
+              </p>
 
-            <FormInput
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Email"
-            />
+              <FormInput
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Email"
+                autoComplete="email"
+              />
 
-            <button
-              type="submit"
-              // disabled={!isValid}
-              className="bg-white disabled:opacity-60 py-3 rounded w-full font-semibold text-[#38A5FF] disabled:cursor-not-allowed"
-            >
-              Send Link
-            </button>
-
-            <div className="text-sm text-center">
-              Remember your password?{" "}
-              <Link
-                to="/login"
-                className="ml-1 underline hover:underline-offset-2"
+              <button
+                type="submit"
+                disabled={!isValid || isSubmitting}
+                className="bg-white disabled:opacity-60 py-3 rounded w-full font-semibold text-[#38A5FF] disabled:cursor-not-allowed"
               >
-                Login
-              </Link>
-            </div>
-          </Form>
+                Send Link
+              </button>
+
+              <div className="text-sm text-center">
+                Remember your password?{" "}
+                <Link
+                  to="/login"
+                  className="ml-1 underline hover:underline-offset-2"
+                >
+                  Login
+                </Link>
+              </div>
+            </Form>
+          )}
         </Formik>
       </div>
     </div>

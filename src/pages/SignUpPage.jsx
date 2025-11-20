@@ -73,53 +73,59 @@ function SignUpPage() {
           validationSchema={validationSchema}
           validateOnMount
         >
-          <Form className="space-y-4">
-            <FormInput
-              id="username"
-              name="username"
-              type="text"
-              placeholder="Username"
-            />
+          {({ isValid, isSubmitting }) => (
+            <Form className="space-y-4">
+              <FormInput
+                id="username"
+                name="username"
+                type="text"
+                placeholder="Username"
+                autoComplete="username"
+              />
 
-            <FormInput
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Email"
-            />
+              <FormInput
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Email"
+                autoComplete="email"
+              />
 
-            <FormInput
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Password"
-            />
+              <FormInput
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Password"
+                autoComplete="new-password"
+              />
 
-            <FormInput
-              id="confirm-password"
-              name="confirmPassword"
-              type="password"
-              placeholder="Confirm Password"
-            />
+              <FormInput
+                id="confirm-password"
+                name="confirmPassword"
+                type="password"
+                placeholder="Confirm Password"
+                autoComplete="new-password"
+              />
 
-            <button
-              type="submit"
-              // disabled={!isValid}
-              className="bg-white disabled:opacity-60 py-3 rounded w-full font-semibold text-[#38A5FF] disabled:cursor-not-allowed"
-            >
-              CREATE
-            </button>
-
-            <div className="text-sm text-center">
-              Already have an account?
-              <Link
-                to="/login"
-                className="ml-1 underline hover:underline-offset-2"
+              <button
+                type="submit"
+                disabled={!isValid || isSubmitting}
+                className="bg-white disabled:opacity-60 py-3 rounded w-full font-semibold text-[#38A5FF] disabled:cursor-not-allowed"
               >
-                Login
-              </Link>
-            </div>
-          </Form>
+                CREATE
+              </button>
+
+              <div className="text-sm text-center">
+                Already have an account?
+                <Link
+                  to="/login"
+                  className="ml-1 underline hover:underline-offset-2"
+                >
+                  Login
+                </Link>
+              </div>
+            </Form>
+          )}
         </Formik>
       </div>
     </div>

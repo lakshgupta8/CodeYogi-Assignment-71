@@ -1,54 +1,32 @@
 import { useField } from "formik";
-import {
-  HiOutlineUser,
-  HiOutlineMail,
-  HiOutlineLockClosed,
-  HiOutlineLockOpen,
-} from "react-icons/hi";
+import Input from "./Input";
 
-const iconMap = {
-  username: <HiOutlineUser className="w-5 h-5" />,
-  email: <HiOutlineMail className="w-5 h-5" />,
-  password: <HiOutlineLockClosed className="w-5 h-5" />,
-  confirmPassword: <HiOutlineLockClosed className="w-5 h-5" />,
-};
-
-function FormInput ({ id, name, placeholder, className = "", ...rest }) {
-  const icon = iconMap[name] || null;
-
+function FormInput({ name, className = "", ...rest }) {
   const [data, meta] = useField(name);
   const { value, onBlur, onChange } = data;
   const { touched, error } = meta;
 
+  const borderClass =
+    touched && error ? "border-primary-medium" : "border-white";
+
+  const combinedClassName =
+    `${className} ${borderClass} ${"focus:ring-white placeholder-white"}`.trim();
+
   return (
     <div>
-      <div className="relative flex items-center">
-        {icon && (
-          <span className="left-3 absolute opacity-80 w-5 h-5 pointer-events-none">
-            {icon}
-          </span>
-        )}
-        <label htmlFor={id} className="sr-only">
-          {placeholder}
-        </label>
-        <input
-          id={id}
-          name={name}
-          value={value}
-          onChange={onChange}
-          onBlur={onBlur}
-          placeholder={placeholder}
-          className={`w-full p-3 pl-10 border ${
-            touched && error ? "border-primary-medium" : "border-white"
-          } transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent rounded placeholder-white bg-transparent ${className}`}
-          {...rest}
-        />
-      </div>
+      <Input
+        name={name}
+        value={value}
+        onBlur={onBlur}
+        onChange={onChange}
+        className={combinedClassName}
+        {...rest}
+      />
       {touched && error && (
         <p className="mt-1 pl-1 text-primary-medium text-sm">{error}</p>
       )}
     </div>
   );
-};
+}
 
 export default FormInput;
