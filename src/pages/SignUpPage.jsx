@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { FaAmazon } from "react-icons/fa";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import FormInput from "../components/FormInput";
+import FormInput from "../components/Input";
 
 function SignUpPage() {
   const navigate = useNavigate();

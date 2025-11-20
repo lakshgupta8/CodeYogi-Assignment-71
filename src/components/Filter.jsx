@@ -1,5 +1,5 @@
 import { memo, useCallback } from "react";
-import Input from "./Input";
+import { Input } from "./Input";
 
 function Filter({ query, sort, onSearch, onSort }) {
   const handleSearch = useCallback(
@@ -17,7 +17,7 @@ function Filter({ query, sort, onSearch, onSort }) {
   );
 
   return (
-    <div className="flex sm:flex-row flex-col sm:justify-between gap-3">
+    <div className="flex sm:flex-row flex-col sm:justify-between gap-3 text-gray-600 text-xs">
       <Input
         id="search"
         name="search"
@@ -25,14 +25,14 @@ function Filter({ query, sort, onSearch, onSort }) {
         value={query}
         type="text"
         placeholder="Search products"
-        className="focus:ring-primary-light sm:w-64 text-gray-600 text-xs placeholder-gray-600"
+        className="focus:ring-primary-light sm:w-64 placeholder-gray-600"
         onChange={handleSearch}
         autoComplete="search"
       />
 
       <select
         value={sort}
-        className="p-3 border focus:border-transparent rounded focus:outline-none focus:ring-2 focus:ring-primary-light w-full sm:w-64 text-gray-600 text-xs"
+        className="p-3 border focus:border-transparent rounded focus:outline-none focus:ring-2 focus:ring-primary-light w-full sm:w-64"
         onChange={handleSort}
       >
         <option value="default">Default Sort</option>
