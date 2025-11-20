@@ -1,5 +1,5 @@
 import { memo, useCallback } from "react";
-import { Input } from "./Input";
+import Input from "./Input";
 
 function Filter({ query, sort, onSearch, onSort }) {
   const handleSearch = useCallback(
