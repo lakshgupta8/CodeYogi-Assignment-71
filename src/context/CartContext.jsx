@@ -130,12 +130,10 @@ export default function CartProvider({ children }) {
   }, []);
 
   const value = {
-    cartItems,
     cartItemsData,
     loading,
     count,
     subtotal,
-    calculatedSubtotal,
     addToCart: handleAddToCart,
     removeFromCart: handleRemoveFromCart,
     updateQuantity: handleQuantityChange,
